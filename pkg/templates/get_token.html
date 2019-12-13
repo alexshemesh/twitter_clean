@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Remove all Following connections in Twitter{% endblock %}
+
+{% block styles %}
+{{ super() }}
+
+{% endblock %}
+{% block content %}
+<div class="row align-items-center justify-content-center">
+        <div class="col-md-4">
+          <form  action="" method="post" role="form">
+            {{ form.csrf }}
+            <div class="form-group">
+              <label for="consumer-id">Twitter Consumer ID:</label>
+              <input type="text" class="form-control" id="consumer-id" name="consumer-id" placeholder="Consumer ID?">
+                <br>
+              <label for="consumer-secret">Twitter Consumer secret:</label>
+              <input type="password" class="form-control" id="consumer-secret" name="consumer-secret" placeholder="Enter a consumer secret.">
+
+              
+            <br>
+        </div>
+            <br>													   
+            <center>
+              <button type="submit" class="btn btn-success">Get auth token.</button>
+            </center>
+          </form>
+          <br>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+            {% for message in messages %}
+                {% if "Error" not in message[1]: %}
+                    <div class="alert alert-info">
+                    <strong>Success! </strong> {{ message[1] }}
+                    </div>
+                {% endif %}
+                {% if "Error" in message[1]: %}
+                    <div class="alert alert-danger">
+                    <strong>Error: </strong> {{ message[1] }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <br>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

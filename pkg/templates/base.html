@@ -1,0 +1,64 @@
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block head_description %}{% endblock %}">
+    <meta name="author" content="{% block head_author %}{% endblock %}">
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+   
+    {% block styles %}{% endblock %}
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <div class="navbar-nav">
+            <a class="navbar-brand">twitter-rm</a>
+            <a class="navbar-brand">|</a>
+            <a class="navbar-brand" href="{{url_for('get_token')">Get token</a>
+            <a class="navbar-brand">-></a>
+            <a class="navbar-brand">Remove Friends</a>
+            <a class="navbar-brand">-></a>
+            <a class="navbar-brand">Invalidate token</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    {% block content %}{% endblock %}
+</div> <!-- /container -->
+
+<script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script type='text/javascript'>
+    function hrefSorter(fieldA, fieldB, rowA, rowB) {
+        var div = document.createElement('div');
+        div.innerHTML = fieldA.trim();
+        var text1 = div.innerText
+        var div2 = document.createElement('div');
+        div2.innerHTML = fieldB.trim();
+        var text2 = div2.innerText.trim()
+
+        if (isNaN(text1) || isNaN(text2)) {
+            return text1.localeCompare(text2)
+        } else {
+            var num1 = parseInt(text1)
+            var num2 = parseInt(text2)
+            if (num1 < num2) return -1;
+            if (num1 > num2) return 1;
+            return 0;
+        }
+    }
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
